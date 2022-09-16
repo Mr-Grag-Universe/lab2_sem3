@@ -25,8 +25,12 @@ public:
     double extra_radius();
 
     double y_from_x(double x);
+    double y_from_angle(double angle);
     double radius_vector(double angle);
     double radius_vector(std::pair<double, double> coord);
+    std::vector<std::pair<std::string, double>> CR_in_CP_of_CN();
+    double loop_area();
+    std::vector<std::pair<double, double>> inflection_points();
 };
 
 
