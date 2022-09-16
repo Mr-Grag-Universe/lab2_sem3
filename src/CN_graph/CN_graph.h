@@ -24,6 +24,10 @@ public:
     double free_member();
     double extra_radius();
 
+    void set_slope_coefficient(double);
+    void set_free_member(double);
+    void set_extra_radius(double);
+
     double y_from_x(double x);
     double y_from_angle(double angle);
     double radius_vector(double angle);

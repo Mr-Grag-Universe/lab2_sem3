@@ -9,10 +9,10 @@
 std::pair<double, double> approximate_calculation(double (*formula)(double, double));
 std::vector<double> approximate_calculation(double (*formula)(double, double, double, double), double a, double k, double l, double ex) {
     std::vector<double> v;
-    double e = formula(-100, a, k, l);
+    //double e = formula(-100, a, k, l);
     double delta = 10;
     bool go_away = false;
-    for (double x = -100000+1; x < 100000; ++x) {
+    for (long x = -100000+1; x < 100000; ++x) {
         double res = formula(x/1000, a, k, l);
         if (delta > std::abs(res-ex)) {
             v.pop_back();
@@ -30,13 +30,22 @@ std::vector<double> approximate_calculation(double (*formula)(double, double, do
 double CN_graph::slope_coefficient() {
     return this->k;
 }
-
 double CN_graph::free_member() {
     return this->a;
 }
-
 double CN_graph::extra_radius() {
     return this->l;
+}
+
+
+void CN_graph::set_slope_coefficient(double sc) {
+    this->k = sc;
+}
+void CN_graph::set_free_member(double fm) {
+    this->a = fm;
+}
+void CN_graph::set_extra_radius(double er) {
+    this->l = er;
 }
 
 
@@ -54,16 +63,16 @@ double CN_graph::y_from_angle(double angle) {
 double CN_graph::radius_vector(double angle) {
     return this->l + this->a / (-cos(angle)*this->k + sin(angle));
 }
-
 double CN_graph::radius_vector(std::pair<double, double> coord) {
     return std::sqrt(pow(coord.first, 2) + pow(coord.second, 2));
 }
 
 std::vector<std::pair<std::string, double>> CN_graph::CR_in_CP_of_CN() {
     std::vector<std::pair<std::string, double>> v;
-    v.emplace_back("A", 1);
-    v.emplace_back("B", 1);
-    v.emplace_back("C", 1);
+    v.push_back(std::make_pair("A", pow(a+l, 2)/l));
+    v.push_back(std::make_pair("B", pow(l-a, 2)/l));
+    if (a <= l)
+        v.emplace_back("C", l*sqrt(l*l - a*a)/(2*a));
     return v;
 }
 

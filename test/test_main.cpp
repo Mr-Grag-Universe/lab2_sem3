@@ -56,14 +56,24 @@ TEST_F(TestCN, radius_vector_coords) {
 }
 
 TEST_F(TestCN, CR_in_CP_of_CN) {
-    std::vector <std::pair<std::string, double>> v = cn_plus_plus_small.CR_in_CP_of_CN();
-    EXPECT_DOUBLE_EQ(v[0].second, 1);
-    EXPECT_DOUBLE_EQ(v[1].second, 1);
-    EXPECT_DOUBLE_EQ(v[2].second, 1);
+    CN_graph cn(3, 3, 5);
+    std::vector <std::pair<std::string, double>> v = cn.CR_in_CP_of_CN();
+    for (const auto& r: v)
+        EXPECT_DOUBLE_EQ(r.second, 1);
 }
 
 TEST_F(TestCN, loop_area) {
     EXPECT_DOUBLE_EQ(cn_plus_plus_small.loop_area(), 0);
+}
+
+TEST(just_test, inflection_points) {
+    CN_graph cn(3, MAXFLOAT, 2);
+    std::vector<std::pair<double, double>> ip = cn.inflection_points();
+    std::cout << ip.size();
+    for (auto coord: ip) {
+        EXPECT_DOUBLE_EQ(coord.first, 3);
+        EXPECT_DOUBLE_EQ(coord.second, 3);
+    }
 }
 
 int main(int argc, char **argv) {
@@ -80,6 +90,8 @@ int main(int argc, char **argv) {
     TestCN_CR_in_CP_of_CN_Test();
 
     TestCN_loop_area_Test();
+
+    just_test_inflection_points_Test();
 
     return RUN_ALL_TESTS();
 }
