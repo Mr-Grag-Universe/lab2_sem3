@@ -11,7 +11,7 @@ add_subdirectory(CN_graph)
 set(BINARY ${CMAKE_PROJECT_NAME})
 
 # 1
-add_executable(lab2_sem3 main.cpp)
+add_executable(lab2_sem3 main.cpp interaction.cpp)
 target_link_libraries(lab2_sem3 CN_graph_lib)
 
 # 2

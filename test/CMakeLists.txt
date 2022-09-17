@@ -17,6 +17,6 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # 'Google_Tests_run' is the target name
 # 'test1.cpp tests2.cpp' are source files with tests
-add_executable(Google_Tests_run test_main.cpp)
+add_executable(Google_Tests_run test_main.cpp test_classes.h)
 include_directories(../src/CN_graph)
 target_link_libraries(Google_Tests_run CN_graph_lib gtest gtest_main)
