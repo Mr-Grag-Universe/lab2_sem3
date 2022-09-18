@@ -10,13 +10,21 @@
 class TestCN : public ::testing::Test
 {
 public:
-    TestCN() = default;
+    virtual void SetUp() {
+        cn_plus_plus_small = CN_graph(2, 0.5, 1);
+        cn_plus_minus_small = CN_graph(3, -0.5, 1);
+        cn_minus_plus_small = CN_graph(-3, 2, 1);
+        cn_minus_minus_small = CN_graph(-3, -2, 1);
+    }
+    virtual void TearDown() {
+
+    }
 protected:
-    CN_graph cn_plus_plus_small = CN_graph(2, 0.5, 1);
-    CN_graph cn_plus_minus_small = CN_graph(3, -0.5, 1);
-    CN_graph cn_minus_plus_small = CN_graph(-3, 2, 1);
-    CN_graph cn_minus_minus_small = CN_graph(-3, -2, 1);
-    CN_graph cn_zero_zero = CN_graph(0, 0, 1);
+    CN_graph cn_plus_plus_small;
+    CN_graph cn_plus_minus_small;
+    CN_graph cn_minus_plus_small;
+    CN_graph cn_minus_minus_small;
+    CN_graph cn_zero_zero;
     // CN_graph cn_zero_small1 = CN_graph(3, 0, 1);
     // CN_graph cn_zero_small2 = CN_graph(0, FLT_MAX, 1);
 protected:

@@ -50,10 +50,12 @@ void CN_graph::set_extra_radius(double er) {
 
 
 double CN_graph::y_from_x(double x) {
-    if (this->k != 0 && this->k < 1000) {
+    if (this->k < 1000) {
         throw std::invalid_argument("we cannot calculate this without angle.");
     }
-    return std::sqrt(pow(x*l, 2) / pow(x - this->a, 2) - x*x);
+    if (this->k >= 1000)
+        return std::sqrt(pow(x*l, 2) / pow(x - this->a, 2) - x*x);
+    return 0;
 }
 
 double CN_graph::y_from_angle(double angle) {
