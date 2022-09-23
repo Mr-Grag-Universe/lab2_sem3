@@ -27,7 +27,7 @@ std::vector<double> approximate_calculation(double (*formula)(double, double, do
     return v;
 }
 
-bool CN_graph::check_coords(std::pair<double, double> coord, double e) {
+bool CN_graph::check_coords(std::pair<double, double> coord, double e) const {
     double x = coord.first;
     double y = coord.second;
     double A = atan(k);
@@ -36,13 +36,13 @@ bool CN_graph::check_coords(std::pair<double, double> coord, double e) {
     return plus_l || minus_l;
 }
 
-double CN_graph::slope_coefficient() {
+double CN_graph::slope_coefficient() const {
     return this->k;
 }
-double CN_graph::free_member() {
+double CN_graph::free_member() const {
     return this->a;
 }
-double CN_graph::extra_radius() {
+double CN_graph::extra_radius() const {
     return this->l;
 }
 
@@ -58,7 +58,7 @@ void CN_graph::set_extra_radius(double er) {
 }
 
 
-double CN_graph::y_from_x(double x) {
+double CN_graph::y_from_x(double x) const {
     if (this->k < 1000) {
         throw std::invalid_argument("we cannot calculate this without angle.");
     }
@@ -67,20 +67,20 @@ double CN_graph::y_from_x(double x) {
     return 0;
 }
 
-double CN_graph::y_from_angle(double angle) {
+double CN_graph::y_from_angle(double angle) const {
     return (this->a / (sin(angle) - this->k * cos(angle)) + this->l) * sin(angle);
 }
 
-double CN_graph::radius_vector(double angle) {
+double CN_graph::radius_vector(double angle) const {
     return this->l + this->a / (-cos(angle)*this->k + sin(angle));
 }
-double CN_graph::radius_vector(std::pair<double, double> coord) {
+double CN_graph::radius_vector(std::pair<double, double> coord) const {
     if (check_coords(coord, 0.0001))
         return std::sqrt(pow(coord.first, 2) + pow(coord.second, 2));
     throw std::invalid_argument("this coords do not below this graph");
 }
 
-std::vector<std::pair<std::string, double>> CN_graph::CR_in_CP_of_CN() {
+std::vector<std::pair<std::string, double>> CN_graph::CR_in_CP_of_CN() const {
     std::vector<std::pair<std::string, double>> v;
     v.emplace_back("A", pow(a+l, 2)/l);
     v.emplace_back("B", pow(l-a, 2)/l);
@@ -89,7 +89,7 @@ std::vector<std::pair<std::string, double>> CN_graph::CR_in_CP_of_CN() {
     return v;
 }
 
-double CN_graph::loop_area() {
+double CN_graph::loop_area() const {
     if (l < a)
         return 0;
     return a*sqrt(l*l - a*a) - 2*a*l*log((l+sqrt(l*l-a*a))/a) + l*l*acos(a/l);
@@ -103,7 +103,7 @@ double y_primal_formula(double x, double a, double k, double l) {
     return sqrt(l*l*x*x / pow((x-a), 2) - x*x);
 }
 
-std::vector<std::pair<double, double>> CN_graph::inflection_points() {
+std::vector<std::pair<double, double>> CN_graph::inflection_points() const {
     if (k != 0 && k < 1000)
         throw std::invalid_argument("we cannot find this points in such curve");
     std::vector<std::pair<double, double>> res;
@@ -118,4 +118,10 @@ std::vector<std::pair<double, double>> CN_graph::inflection_points() {
         }
     }
     return res;
+}
+
+CN_graph CN_graph::input(std::istream & cin) {
+    CN_graph cn;
+    cin >> cn.a >> cn.k >> cn.l;
+    return cn;
 }

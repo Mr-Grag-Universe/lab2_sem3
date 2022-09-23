@@ -42,33 +42,37 @@ public:
 
     ~CN_graph() = default;
 
-    bool check_coords(std::pair<double, double> coord, double e);
-
-    double slope_coefficient();
-
-    double free_member();
-
-    double extra_radius();
-
     void set_slope_coefficient(double);
 
     void set_free_member(double);
 
     void set_extra_radius(double);
 
-    double y_from_x(double x);
+    static CN_graph input(std::istream & cin);
 
-    double y_from_angle(double angle);
+    [[nodiscard]] bool check_coords(std::pair<double, double> coord, double e) const;
 
-    double radius_vector(double angle);
+    [[nodiscard]] double slope_coefficient() const;
 
-    double radius_vector(std::pair<double, double> coord);
+    [[nodiscard]] double free_member() const;
 
-    std::vector<std::pair<std::string, double>> CR_in_CP_of_CN();
+    [[nodiscard]] double extra_radius() const;
 
-    double loop_area();
+    [[nodiscard]] double y_from_x(double x) const;
 
-    std::vector<std::pair<double, double>> inflection_points();
+    [[nodiscard]] double y_from_angle(double angle) const;
+
+    [[nodiscard]] double radius_vector(double angle) const;
+
+    [[nodiscard]] double radius_vector(std::pair<double, double> coord) const;
+
+    [[nodiscard]] std::vector<std::pair<std::string, double>> CR_in_CP_of_CN() const;
+
+    [[nodiscard]] double loop_area() const;
+
+    [[nodiscard]] std::vector<std::pair<double, double>> inflection_points() const;
+
+    void plot(int argc, char* argv[]);
 };
 
 

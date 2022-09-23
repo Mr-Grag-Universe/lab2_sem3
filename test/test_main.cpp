@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+
 #include "gtest/gtest.h"
 #include "CN_graph/CN_graph.h"
 #include "test_classes.h"
@@ -13,6 +14,13 @@ TEST(initial_funcs, construct) {
     EXPECT_EQ(cn.slope_coefficient(), 0.0);
     EXPECT_EQ(cn.free_member(), 0);
     EXPECT_EQ(cn.extra_radius(), 0);
+}
+TEST(initial_funcs, input) {
+    std::istringstream str("1 1 1");
+    CN_graph cn = CN_graph::input(str);
+    EXPECT_EQ(cn.slope_coefficient(), 1);
+    EXPECT_EQ(cn.free_member(), 1);
+    EXPECT_EQ(cn.extra_radius(), 1);
 }
 
 TEST_F(TestCN, y_from_x) {

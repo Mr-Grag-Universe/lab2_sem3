@@ -26,6 +26,9 @@ add_compile_options(
         #        -Wsign-promo
 )
 
+set(CMAKE_PREFIX_PATH "C:\\Qt\\5.15.2\\mingw81_64\\")
+find_package(Qt5Widgets REQUIRED)
+
 include_directories(src)
 
 add_subdirectory(src)

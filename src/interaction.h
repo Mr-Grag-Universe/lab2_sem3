@@ -7,6 +7,8 @@
 
 #include "CN_graph.h"
 
+int read_int();
+
 CN_graph new_cn();
 
 void new_a(CN_graph &cn);

@@ -3,14 +3,31 @@
 //
 #include <iostream>
 
-
 #include "interaction.h"
 #include "CN_graph.h"
 
+int read_int() {
+    std::string s;
+    if (!(std::cin >> s)) {
+        std::cout << "end of this stream" << std::endl;
+        throw std::runtime_error("");
+    }
+    int n;
+    try {
+        n = std::stoi(s);
+    } catch (const std::invalid_argument & e) {
+        std::cerr << e.what() << std::endl;
+        throw std::runtime_error("wrong input");
+    } catch (const std::out_of_range & e) {
+        std::cerr << e.what() << std::endl;
+        throw std::invalid_argument("wrong input");
+    }
+    return n;
+}
+
+
 CN_graph new_cn() {
-    double a{}, k{}, l{};
-    std::cin >> a >> k >> l;
-    CN_graph cn(a, k, l);
+    CN_graph cn = CN_graph::input(std::cin);
     return cn;
 }
 
