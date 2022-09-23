@@ -42,13 +42,21 @@ void find_y_from_x(CN_graph &cn) {
     double x{};
     std::cout << "x: ";
     std::cin >> x;
-    std::cout << "y: "<< cn.y_from_x(x) << std::endl;
+    try {
+        std::cout << "y: "<< cn.y_from_x(x) << std::endl;
+    } catch (...) {
+        throw std::runtime_error("something wrong in finding y from x");
+    }
 }
 void find_y_from_angle(CN_graph &cn) {
     double angle{};
     std::cout << "angle: ";
     std::cin >> angle;
-    std::cout << "y: "<< cn.y_from_angle(angle) << std::endl;
+    try {
+        std::cout << "y: "<< cn.y_from_angle(angle) << std::endl;
+    } catch (...) {
+        throw std::runtime_error("something wrong in finding y from angle");
+    }
 }
 
 void find_radius_vector(CN_graph &cn) {
@@ -56,25 +64,34 @@ void find_radius_vector(CN_graph &cn) {
     std::cout << "do you have angle or coords of point\n1 - angle\n2 - coords" << std::endl;
     while (chose_angle_coords < 1 || chose_angle_coords > 2)
         std::cin >> chose_angle_coords;
-    if (chose_angle_coords == 1) {
-        double angle{};
-        std::cout << "angle: ";
-        std::cin >> angle;
-        std::cout << "radius vector: "<< cn.radius_vector(angle) << std::endl;
-    } else if (chose_angle_coords == 2) {
-        std::pair<double, double> coords;
-        std::cout << "x: ";
-        std::cin >> coords.first;
-        std::cout << "y: ";
-        std::cin >> coords.second;
+    try {
+        if (chose_angle_coords == 1) {
+            double angle{};
+            std::cout << "angle: ";
+            std::cin >> angle;
+            std::cout << "radius vector: "<< cn.radius_vector(angle) << std::endl;
+        } else if (chose_angle_coords == 2) {
+            std::pair<double, double> coords;
+            std::cout << "x: ";
+            std::cin >> coords.first;
+            std::cout << "y: ";
+            std::cin >> coords.second;
 
-        std::cout << "radius vector: "<< cn.radius_vector(coords) << std::endl;
+            std::cout << "radius vector: "<< cn.radius_vector(coords) << std::endl;
+        }
+    } catch (...) {
+        throw std::runtime_error("something wrong in finding radius vector");
     }
 }
 
 void find_CR_in_CP_of_CN(CN_graph &cn) {
     std::cout << "CR in CP of CN\n";
-    std::vector<std::pair<std::string, double>> v = cn.CR_in_CP_of_CN();
+    std::vector<std::pair<std::string, double>> v;
+    try {
+        v = cn.CR_in_CP_of_CN();
+    } catch (...) {
+        throw std::runtime_error("something wrong in finding y character points.");
+    }
     for (const auto& el: v)
         std::cout << el.first << " " << el.second << std::endl;
 }
@@ -90,7 +107,12 @@ void find_inflection_points(CN_graph &cn) {
     }
 
     std::cout << "inflection points of this CN are:\n";
-    std::vector<std::pair<double, double>> v = cn.inflection_points();
+    std::vector<std::pair<double, double>> v;
+    try {
+        v = cn.inflection_points();
+    } catch (...) {
+        throw std::runtime_error("something wrong in finding inflection points");
+    }
     for (auto el: v)
         std::cout << el.first << " " << el.second << std::endl;
 }

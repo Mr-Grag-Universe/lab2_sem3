@@ -6,56 +6,48 @@
 #include "CN_graph.h"
 #include "interaction.h"
 
-typedef enum Funcs{
-    EXIT,
-    NEW_CN,
-    NEW_A,
-    NEW_K,
-    NEW_L,
-    Y_FROM_X,
-    Y_FROM_ANGLE,
-    RADIUS_VECTOR,
-    CURVATURE_RADIUS,
-    LOOP_AREA,
-    INFLECTION_POINTS,
-} Funcs;
 
 bool execute_command(Funcs id, CN_graph &cn) {
-    switch (id) {
-        case EXIT:
-            return false;
-        case NEW_CN:
-            cn = new_cn();
-            return true;
-        case NEW_A:
-            new_a(cn);
-            return true;
-        case NEW_K:
-            new_k(cn);
-            return true;
-        case NEW_L:
-            new_l(cn);
-            return true;
-        case Y_FROM_X:
-            find_y_from_x(cn);
-            return true;
-        case Y_FROM_ANGLE:
-            find_y_from_angle(cn);
-            return true;
-        case RADIUS_VECTOR:
-            find_radius_vector(cn);
-            return true;
-        case CURVATURE_RADIUS:
-            find_CR_in_CP_of_CN(cn);
-            return true;
-        case LOOP_AREA:
-            find_loop_area(cn);
-            return true;
-        case INFLECTION_POINTS:
-            find_inflection_points(cn);
-            return true;
-        default:
-            return true;
+    try {
+        switch (id) {
+            case EXIT:
+                return false;
+            case NEW_CN:
+                cn = new_cn();
+                return true;
+            case NEW_A:
+                new_a(cn);
+                return true;
+            case NEW_K:
+                new_k(cn);
+                return true;
+            case NEW_L:
+                new_l(cn);
+                return true;
+            case Y_FROM_X:
+                find_y_from_x(cn);
+                return true;
+            case Y_FROM_ANGLE:
+                find_y_from_angle(cn);
+                return true;
+            case RADIUS_VECTOR:
+                find_radius_vector(cn);
+                return true;
+            case CURVATURE_RADIUS:
+                find_CR_in_CP_of_CN(cn);
+                return true;
+            case LOOP_AREA:
+                find_loop_area(cn);
+                return true;
+            case INFLECTION_POINTS:
+                find_inflection_points(cn);
+                return true;
+            default:
+                return true;
+        }
+    } catch (...) {
+        std::cout << "error in execution.";
+        return true;
     }
 }
 

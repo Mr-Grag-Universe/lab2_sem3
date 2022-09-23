@@ -8,6 +8,20 @@
 #include <algorithm>
 #include <vector>
 
+typedef enum Funcs{
+    EXIT,
+    NEW_CN,
+    NEW_A,
+    NEW_K,
+    NEW_L,
+    Y_FROM_X,
+    Y_FROM_ANGLE,
+    RADIUS_VECTOR,
+    CURVATURE_RADIUS,
+    LOOP_AREA,
+    INFLECTION_POINTS,
+} Funcs;
+
 class CN_graph {
 private:
     double a;
@@ -27,6 +41,8 @@ public:
     }
 
     ~CN_graph() = default;
+
+    bool check_coords(std::pair<double, double> coord, double e);
 
     double slope_coefficient();
 

@@ -80,8 +80,5 @@ int main(int argc, char **argv) {
 
     just_test_inflection_points_Test();
 
-    //int a = 0;
-    // std::cin >> a;
-
     return RUN_ALL_TESTS();
 }

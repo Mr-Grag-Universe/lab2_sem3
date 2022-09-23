@@ -27,6 +27,15 @@ std::vector<double> approximate_calculation(double (*formula)(double, double, do
     return v;
 }
 
+bool CN_graph::check_coords(std::pair<double, double> coord, double e) {
+    double x = coord.first;
+    double y = coord.second;
+    double A = atan(k);
+    bool plus_l = std::abs((x*sin(A) - y*cos(A)) + cos(A)*a - l*(x*sin(A) - y*cos(A))/sqrt(x*x + y*y)) <= std::abs(e);
+    bool minus_l = std::abs((x*sin(A) - y*cos(A)) + cos(A)*a + l*(x*sin(A) - y*cos(A))/sqrt(x*x + y*y)) <= std::abs(e);
+    return plus_l || minus_l;
+}
+
 double CN_graph::slope_coefficient() {
     return this->k;
 }
@@ -66,13 +75,15 @@ double CN_graph::radius_vector(double angle) {
     return this->l + this->a / (-cos(angle)*this->k + sin(angle));
 }
 double CN_graph::radius_vector(std::pair<double, double> coord) {
-    return std::sqrt(pow(coord.first, 2) + pow(coord.second, 2));
+    if (check_coords(coord, 0.0001))
+        return std::sqrt(pow(coord.first, 2) + pow(coord.second, 2));
+    throw std::invalid_argument("this coords do not below this graph");
 }
 
 std::vector<std::pair<std::string, double>> CN_graph::CR_in_CP_of_CN() {
     std::vector<std::pair<std::string, double>> v;
-    v.push_back(std::make_pair("A", pow(a+l, 2)/l));
-    v.push_back(std::make_pair("B", pow(l-a, 2)/l));
+    v.emplace_back("A", pow(a+l, 2)/l);
+    v.emplace_back("B", pow(l-a, 2)/l);
     if (a <= l)
         v.emplace_back("C", l*sqrt(l*l - a*a)/(2*a));
     return v;
