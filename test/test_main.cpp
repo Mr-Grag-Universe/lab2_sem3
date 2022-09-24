@@ -18,9 +18,9 @@ TEST(initial_funcs, construct) {
 TEST(initial_funcs, input) {
     std::istringstream str("1 1 1");
     CN_graph cn = CN_graph::input(str);
-    EXPECT_EQ(cn.slope_coefficient(), 1);
-    EXPECT_EQ(cn.free_member(), 1);
-    EXPECT_EQ(cn.extra_radius(), 1);
+    ASSERT_TRUE(cn.slope_coefficient() == 1);
+    ASSERT_TRUE(cn.free_member() ==1);
+    ASSERT_TRUE(cn.extra_radius() == 1);
 }
 
 TEST_F(TestCN, y_from_x) {

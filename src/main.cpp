@@ -68,6 +68,7 @@ void print_instruction() {
 }
 
 int main() {
+    std::cout << "enter your initial graph params: ";
     CN_graph cn = new_cn();
     Funcs command_id = EXIT;
     print_instruction();
